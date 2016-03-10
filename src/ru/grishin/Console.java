@@ -18,7 +18,7 @@ public class Console {
                 System.out.println("Список поддерживаемых команд:");
                 System.out.println("dir - выводит список файлов в текущей директории");
                 System.out.println("rename - переименовать объект");
-                System.out.println("recovery - сбрас строки");
+                System.out.println("recovery - сброс строки");
                 System.out.println("delete - удаление объекта");
                 System.out.println("exit - выход из программы");
                 System.out.println("=================================================");
@@ -96,5 +96,4 @@ public class Console {
             }
         }
     }
-
 }
