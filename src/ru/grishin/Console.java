@@ -9,6 +9,7 @@ public class Console {
         String command = "";
         System.out.println("Для получения справки введите help");
         while (1 > 0) {
+            String comm = "";
             boolean bool = true;
             System.out.print(">" + command);
             Scanner scan = new Scanner(System.in);
@@ -16,10 +17,12 @@ public class Console {
             if(console.toLowerCase().equals("help")){
                 System.out.println("=================================================");
                 System.out.println("Список поддерживаемых команд:");
+                System.out.println("    ");
                 System.out.println("dir - выводит список файлов в текущей директории");
                 System.out.println("rename - переименовать объект");
-                System.out.println("recovery - сброс строки");
+                System.out.println("create - создать новую папку");
                 System.out.println("delete - удаление объекта");
+                System.out.println("recovery - сброс строки");
                 System.out.println("exit - выход из программы");
                 System.out.println("=================================================");
                 console = "";
@@ -49,19 +52,38 @@ public class Console {
                 System.out.println("Введите имя объекта, который желаете переименовать");
                 Scanner scan2 = new Scanner(System.in);
                 String rename = scan2.nextLine();
-                command += rename;
-                java.io.File file2 = new java.io.File(command);
+                comm = command + rename;
+                java.io.File file2 = new java.io.File(comm);
                 if (file2.exists()) {
                     System.out.println("Введите новое имя объекту");
                     Scanner scan3 = new Scanner(System.in);
                     String rename2 = scan3.nextLine();
-                    int r = rename.length();
-                    command = command.substring(0, command.length() - r);
-                    file2.renameTo(new java.io.File(command + rename2));
-                    System.out.println("Объект переименован успешно");
-                    bool = false;
+                    java.io.File file3 = new java.io.File(command + rename2);
+                    if (file3.exists()){
+                        System.out.println("Объект с таким именем уже существует");
+                        bool = false;
+                    } else {
+                        file2.renameTo(new java.io.File(command + rename2));
+                        System.out.println("Объект переименован успешно");
+                        bool = false;
+                    }
                 } else {
                     System.out.println("Объект не найден.");
+                    bool = false;
+                }
+            }
+            if (console.toLowerCase().equals("create")){
+                System.out.println("Введите имя новой папки");
+                Scanner scan5 = new Scanner(System.in);
+                String create = scan5.nextLine();
+                java.io.File file2 = new java.io.File(command + create);
+                if (file2.exists()) {
+                    System.out.println("Папка с таким именем уже существует");
+                    bool = false;
+                } else {
+                    File myCreate = new File(command + create);
+                    myCreate.mkdir();
+                    System.out.println("Папка успешно создана");
                     bool = false;
                 }
             }
@@ -69,12 +91,10 @@ public class Console {
                 System.out.println("Введите имя объекта для удаления");
                 Scanner scan4 = new Scanner(System.in);
                 String delete = scan4.nextLine();
-                command += delete;
-                File file = new File(command);
+                comm = command + delete;
+                File file = new File(comm);
                 if (file.delete()){
                     System.out.println("Объект " + delete + " успешно удален");
-                    int d = delete.length();
-                    command = command.substring(0, command.length() - d);
                     bool = false;
                 } else {
                     System.out.println("Объект " + delete + " не найден");
