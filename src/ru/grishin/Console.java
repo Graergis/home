@@ -1,23 +1,27 @@
 package ru.grishin;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Console {
 
     public static void main(String[] args) {
         String command = "";
+        List <String> cons = new ArrayList<>();
         System.out.println("Для получения справки введите help");
         while (1 > 0) {
-            String comm = "";
+            String comm;
             boolean bool = true;
-            System.out.print(">" + command);
+            System.out.print(command + ">");
             Scanner scan = new Scanner(System.in);
             String console = scan.nextLine();
             if(console.toLowerCase().equals("help")){
                 System.out.println("=================================================");
                 System.out.println("Список поддерживаемых команд:");
                 System.out.println("    ");
+                System.out.println("b - назад");
                 System.out.println("dir - выводит список файлов в текущей директории");
                 System.out.println("rename - переименовать объект");
                 System.out.println("create - создать новую папку");
@@ -31,6 +35,7 @@ public class Console {
             if(console.toLowerCase().equals("recovery")){
                 command = "";
                 console = "";
+                cons.clear();
                 bool = false;
             }
             if (console.toLowerCase().equals("dir")){
@@ -101,17 +106,43 @@ public class Console {
                     bool = false;
                 }
             }
+            if (console.toLowerCase().equals("b")) {
+                if (1 < cons.size()) {
+                    int b1;
+                    for (b1 = 0; b1 < cons.size(); b1++) {
+                    }
+                    cons.remove(b1 - 1);
+                    String[] con;
+                    con = cons.toArray(new String[cons.size()]);
+                    command = "";
+                    command += con[b1 - 2];
+                    bool = false;
+                } else {
+                    cons.clear();
+                    command = "";
+                    bool = false;
+                }
+            }
             if (console.toLowerCase().equals("exit")){
                 return;
             }
             if (bool) {
-                command += console;
-                File file = new File(command);
-                File[] fi = file.listFiles();
-                if (fi == null) {
+                if (console.endsWith("\\")){
+                    command += console;
+                    cons.add(command);
+                    File file = new File(command);
+                    File[] fi = file.listFiles();
+                    if (fi == null) {
+                        int b;
+                        System.out.println(command + " не является директорией, либо командой.");
+                        int j = console.length();
+                        command = command.substring(0, command.length() - j);
+                        for (b = 0; b < cons.size(); b++) {
+                        }
+                        cons.remove(b - 1);
+                    }
+                } else {
                     System.out.println(command + " не является директорией, либо командой.");
-                    int j = console.length();
-                    command = command.substring(0, command.length() - j);
                 }
             }
         }
