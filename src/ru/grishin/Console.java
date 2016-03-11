@@ -48,9 +48,11 @@ public class Console {
                     System.out.println("Несуществующая директория.");
                 }else {
                     System.out.println("=================================================");
-                    for (int i = 0; i <files.length ; i++) {
+                    int i;
+                    for (i = 0; i <files.length ; i++) {
                         System.out.println(files[i]);
                     }
+                    System.out.println("Элементов в папке: " + i);
                     System.out.println("=================================================");
                 }
                 bool = false;
