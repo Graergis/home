@@ -24,7 +24,6 @@ public class Copy extends Console {
             System.out.println("Папка с таким именем уже существует.");
         }
         File two = new File(coms);
-        System.out.println(one + " " + two);
         try {
             Files.copy(one.toPath(), two.toPath());
         } catch (IOException e) {
