@@ -1,28 +1,49 @@
 package ru.grishin;
 
-import java.util.Scanner;
+import java.io.File;
 
-public class Chdir extends Console{
+public class Chdir extends BasicCommand{
+
+    public static String CHDIR = "";
+    public static boolean BOOLCHDIR = false;
 
     protected Chdir(){
-        int i;
-        for (i = 0; i < S.length; i++) {
-        }
-        i -= 1;
-        java.io.File file2 = new java.io.File(COMMAND + S[i]);
-        if (file2.exists()) {
-            System.out.print("Введите новое имя объекту.>");
-            Scanner scan3 = new Scanner(System.in);
-            String rename2 = scan3.nextLine();
-            java.io.File file3 = new java.io.File(COMMAND + rename2);
-            if (file3.exists()){
-                System.out.println("Объект с таким именем уже существует.");
+        super("chdir");
+    }
+
+    @Override
+    public void help() {
+        System.out.println("Смена текущего нахождения, на новую директорию");
+    }
+
+    @Override
+    public void execute(String root,String[] args) {
+        if (args.length > 1){
+            if (args[0].equals("..")){
+                String[] url = Command.COMMLIST.toArray(new String[Command.COMMLIST.size()]);
+                CHDIR = url[url.length - 2];
+                BOOLCHDIR = true;
             } else {
-                file2.renameTo(new java.io.File(COMMAND + rename2));
-                System.out.println("Объект переименован успешно.");
+                File myFile = new File(args[0]);
+                File[] files = myFile.listFiles();
+                if (files != null) {
+                    CHDIR =  args[0];
+                    BOOLCHDIR = true;
+                }
             }
         } else {
-            System.out.println("Объект не найден.");
+            if (args.length == 1) {
+                File myFile = new File(args[0]);
+                File[] files = myFile.listFiles();
+                if (files != null) {
+                    CHDIR =  args[0];
+                    BOOLCHDIR = true;
+                    return;
+                }
+                String[] url2 = Command.COMMLIST.toArray(new String[Command.COMMLIST.size()]);
+                CHDIR = url2[0];
+                BOOLCHDIR = true;
+            }
         }
     }
 }

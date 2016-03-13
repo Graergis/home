@@ -5,14 +5,23 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Scanner;
 
-public class Copy extends Console {
+public class Copy extends BasicCommand{
 
-    protected Copy(){
-        int i;
-        for (i = 0; i < S.length; i++) {
-        }
-        i -= 1;
-        File one = new File(COMMAND + S[i]);
+    public Copy(){
+        super("copy");
+    }
+
+    @Override
+    public void help() {
+        System.out.println("Использование команды позволяет копировать объект в другую директорию");
+        System.out.println("Пример ввода команды: copy + \"имя объекта для копирования\"");
+        System.out.println("После укажите полный путь для копирования с именем.");
+        System.out.println("Пример полного пути: D:\\Program Files\\Test.txt");
+    }
+
+    @Override
+    public void execute(String root,String[] args) {
+        File one = new File(root);
         System.out.println("Укажите полный путь назначения и имя объекта");
         String coms = "";
         System.out.print(">");

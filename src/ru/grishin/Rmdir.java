@@ -2,20 +2,27 @@ package ru.grishin;
 
 import java.io.File;
 
-public class Rmdir extends Console{
+public class Rmdir extends BasicCommand{
 
     protected Rmdir(){
-        int i;
-        for (i = 0; i < S.length; i++) {
-        }
-        i -= 1;
-        String comm;
-        comm = COMMAND + S[i];
-        File file = new File(comm);
-        if (file.delete()){
-            System.out.println("Объект " + S[i] + " успешно удален.");
-        } else {
-            System.out.println("Объект " + S[i] + " не найден.");
+        super("rmdir");
+    }
+
+    @Override
+    public void help() {
+        System.out.println("Использование команды удаляет выбранный объект в текущей директории");
+        System.out.println("Пример ввода команды: rmdir + \"имя удаляемого объекта\"");
+    }
+
+    @Override
+    public void execute(String root,String[] args) {
+        if(args.length != 0) {
+            File file = new File(root + args[0]);
+            if (file.delete()) {
+                System.out.println("Объект " + args[0] + " успешно удален.");
+            } else {
+                System.out.println("Объект не найден.");
+            }
         }
     }
 }

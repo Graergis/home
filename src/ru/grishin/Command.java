@@ -1,58 +1,41 @@
 package ru.grishin;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
-public class Command extends Console {
+public class Command {
 
-    protected Command() {
-        System.out.println("Для получения справки введите help.");
+    public static List <String> COMMLIST = new ArrayList<>();
+
+    public static void main(String[] args1){
+        String comm = "";
+        CommandList cl = new CommandList();
         while (true) {
-            boolean bool = true;
-            System.out.print(COMMAND + ">");
+            if (Chdir.BOOLCHDIR){
+                comm = Chdir.CHDIR;
+                Chdir.BOOLCHDIR = false;
+            }
+            System.out.print(comm +">");
             Scanner scan = new Scanner(System.in);
-            String console = scan.nextLine();
-            S = console.split(" ");
-            if(S[0].toLowerCase().equals("help")){
-                Help help = new Help();
-                bool = false;
-            }
-            if (console.toLowerCase().equals("dir")){
-                Dir dir = new Dir();
-                bool = false;
-            }
-            if(S[0].toLowerCase().equals("chdir")) {
-                Chdir chdir = new Chdir();
-                bool = false;
-            }
-            if (S[0].toLowerCase().equals("mkdir")){
-                Mkdir mkdir = new Mkdir();
-                bool = false;
-            }
-            if(S[0].toLowerCase().equals("rmdir")){
-                Rmdir rmdir = new Rmdir();
-                bool = false;
-            }
-            if(S[0].toLowerCase().equals("copy")){
-                Copy copy = new Copy();
-                bool = false;
-            }
-            if (console.toLowerCase().equals("exit")){
-                return;
-            }
-            if (bool) {
-                if (console.endsWith("\\")){
-                    COMMAND+= console;
-                    File file = new File(COMMAND);
-                    File[] fi = file.listFiles();
-                    if (fi == null) {
-                        System.out.println(COMMAND + " не является директорией, либо командой.");
-                        int j = console.length();
-                        COMMAND = COMMAND.substring(0, COMMAND.length() - j);
-                    }
+            String line = scan.nextLine();
+            if (line.endsWith("\\")){
+                comm += line;
+                File file = new File(comm);
+                File[] files = file.listFiles();
+                if (files == null) {
+                    comm = comm.substring(0, comm.length() - line.length());
                 } else {
-                    System.out.println(COMMAND + " не является директорией, либо командой.");
+                    COMMLIST.add(comm);
                 }
+            }
+            String[] args = line.split(" ");
+            BasicCommand command = cl.getCommandByName(args[0]);
+            if (command != null){
+                String[] s = Arrays.copyOfRange(args, 1, args.length);
+                command.execute(comm ,s);
             }
         }
     }
