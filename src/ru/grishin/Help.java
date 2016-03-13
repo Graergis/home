@@ -46,11 +46,6 @@ public class Help extends Console {
             System.out.println("=================================================");
             b = false;
         }
-        if (S[i].equals("")){
-            System.out.println("Несуществующая команда для \"help\"");
-            b = false;
-        }
-
         if (b) {
             if (S[i].toLowerCase().equals("help")){
                 System.out.println("=================================================");
@@ -67,6 +62,8 @@ public class Help extends Console {
                 System.out.println("     ");
                 System.out.println("Вызов справки для определенной команды: help + \"команда\"");
                 System.out.println("=================================================");
+            } else {
+                System.out.println("Несуществующая команда для \"help\"");
             }
         }
     }
