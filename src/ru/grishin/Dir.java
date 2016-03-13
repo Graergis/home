@@ -17,6 +17,9 @@ public class Dir extends BasicCommand{
 
     @Override
     public void execute(String root,String[] args) {
+        if (root.equals("")){
+            root = Command.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        }
         File myFile = new File(root);
         File[] files = myFile.listFiles();
         if (files != null) {

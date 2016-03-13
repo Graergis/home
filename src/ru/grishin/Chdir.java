@@ -34,10 +34,10 @@ public class Chdir extends BasicCommand{
             File myFile = new File(args[0]);
             File[] files = myFile.listFiles();
             if (files != null) {
-                    CHDIR = args[0];
-                    Command.COMMLIST.clear();
-                    Command.COMMLIST.add(args[0]);
-                    BOOLCHDIR = true;
+                CHDIR = args[0];
+                Command.COMMLIST.clear();
+                Command.COMMLIST.add(args[0]);
+                BOOLCHDIR = true;
             }
         }
     }
