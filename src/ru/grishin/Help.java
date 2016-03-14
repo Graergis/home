@@ -1,9 +1,11 @@
 package ru.grishin;
 
-public class Help extends BasicCommand {
+import java.io.File;
+
+public class Help extends Command {
 
     protected Help() {
-        super("help", "help");
+        super("help");
     }
 
     @Override
@@ -11,16 +13,16 @@ public class Help extends BasicCommand {
     }
 
     @Override
-    public void execute(String root ,String[] args) {
+    public void execute(File root , String[] args) {
         CommandList cl = new CommandList();
         if (args.length == 0){
             System.out.println("Список поддерживаемых команд:");
-            for (BasicCommand command : cl.getCommands()) {
+            for (Command command : cl.getCommands()) {
                 System.out.println(command.getName());
             }
             System.out.println("Вызов справки для определенной команды: help + \"команда\"");
         } else {
-            BasicCommand command = cl.getCommandByName(args[0]);
+            Command command = cl.getCommandByName(args[0]);
             if (command != null) {
                 command.help();
             }

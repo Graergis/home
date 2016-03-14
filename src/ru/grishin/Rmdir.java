@@ -2,10 +2,10 @@ package ru.grishin;
 
 import java.io.File;
 
-public class Rmdir extends BasicCommand{
+public class Rmdir extends Command{
 
     protected Rmdir(){
-        super("rmdir", "delete");
+        super("rmdir", "rd");
     }
 
     @Override
@@ -15,9 +15,9 @@ public class Rmdir extends BasicCommand{
     }
 
     @Override
-    public void execute(String root,String[] args) {
+    public void execute(File root,String[] args) {
         if(args.length != 0) {
-            File file = new File(root + args[0]);
+            File file = new File(root, args[0]);
             if (file.delete()) {
                 System.out.println("Объект " + args[0] + " успешно удален.");
             } else {

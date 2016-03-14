@@ -2,10 +2,10 @@ package ru.grishin;
 
 import java.io.File;
 
-public class Mkdir extends BasicCommand{
+public class Mkdir extends Command{
 
     protected Mkdir() {
-        super("mkdir", "mkdir");
+        super("mkdir", "md");
     }
 
     @Override
@@ -15,13 +15,13 @@ public class Mkdir extends BasicCommand{
     }
 
     @Override
-    public void execute(String root,String[] args) {
+    public void execute(File root,String[] args) {
         if (args.length != 0){
-            java.io.File file2 = new java.io.File(root + args[0]);
+            java.io.File file2 = new java.io.File(root,  args[0]);
             if (file2.exists()) {
                 System.out.println("Папка с таким именем уже существует.");
             } else {
-                File myCreate = new File(root + args[0]);
+                File myCreate = new File(root, args[0]);
                 myCreate.mkdir();
             }
         }

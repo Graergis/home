@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Scanner;
 
-public class Copy extends BasicCommand{
+public class Copy extends Command{
 
     protected Copy(){
-        super("copy", "copy");
+        super("copy");
     }
 
     @Override
@@ -20,8 +20,8 @@ public class Copy extends BasicCommand{
     }
 
     @Override
-    public void execute(String root,String[] args) {
-        File one = new File(root);
+    public void execute(File root,String[] args) {
+        File one = root;
         System.out.println("Укажите полный путь назначения и имя объекта");
         String coms = "";
         System.out.print(">");
