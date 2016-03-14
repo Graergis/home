@@ -1,6 +1,8 @@
 package ru.grishin;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Dir extends Command {
 
@@ -20,10 +22,19 @@ public class Dir extends Command {
         File[] files = root.listFiles();
         if (files != null) {
             System.out.println("=================================================");
-            for (int i = 0; i <files.length ; i++) {
-                System.out.println(files[i]);
+            if (args.length > 0) {
+                Pattern p = Pattern.compile(args[0]);
+                for (int i = 0; i < files.length; i++) {
+                    Matcher matcher = p.matcher(files[i].getName());
+                    if (matcher.find()) {
+                        System.out.println(files[i]);
+                    }
+                }
+            } else {
+                for (int i = 0; i < files.length; i++) {
+                    System.out.println(files[i]);
+                }
             }
-            System.out.println("Элементов в папке: " + files.length);
             System.out.println("=================================================");
         }
     }

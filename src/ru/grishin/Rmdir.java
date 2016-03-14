@@ -11,7 +11,7 @@ public class Rmdir extends Command{
     @Override
     public void help() {
         System.out.println("Использование команды удаляет выбранный объект в текущей директории");
-        System.out.println("Пример ввода команды: rmdir + \"имя удаляемого объекта\"");
+        System.out.println("Пример ввода команды: rmdir / rd + \"имя удаляемого объекта\"");
     }
 
     @Override

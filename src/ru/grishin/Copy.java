@@ -3,7 +3,6 @@ package ru.grishin;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Scanner;
 
 public class Copy extends Command{
 
@@ -14,29 +13,37 @@ public class Copy extends Command{
     @Override
     public void help() {
         System.out.println("Использование команды позволяет копировать объект в другую директорию");
-        System.out.println("Пример ввода команды: copy + \"имя объекта для копирования\"");
-        System.out.println("После укажите полный путь для копирования с именем.");
-        System.out.println("Пример полного пути: D:\\Program Files\\Test.txt");
+        System.out.println("Пример ввода команды: copy + \"имя объекта для копирования\" + \"новое имя\"");
     }
 
     @Override
     public void execute(File root,String[] args) {
-        File one = root;
-        System.out.println("Укажите полный путь назначения и имя объекта");
-        String coms = "";
-        System.out.print(">");
-        Scanner scan = new Scanner(System.in);
-        String console = scan.nextLine();
-        coms+= console;
-        java.io.File file2 = new java.io.File(coms);
-        if (file2.exists()) {
-            System.out.println("Папка с таким именем уже существует.");
+        java.io.File one = new java.io.File(root, args[0]);
+        if (!one.exists()) {
+            one = new File(args[0]);
         }
-        File two = new File(coms);
+        java.io.File two = new java.io.File(root, args[1]);
+        if (!two.exists()) {
+            two = new File(args[1]);
+        }
         try {
-            Files.copy(one.toPath(), two.toPath());
+            if (one.isFile()) {
+                Files.copy(one.toPath(), two.toPath());
+            } else {
+                copyDirectory(one, two);
+            }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void copyDirectory(File one, File two) throws IOException {
+        Files.copy(one.toPath(), two.toPath());
+        if (one.isDirectory()){
+            File[] files = one.listFiles();
+            for(File file : files){
+                copyDirectory(file, new File(two, file.getName()));
+            }
         }
     }
 }

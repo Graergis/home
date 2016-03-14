@@ -11,7 +11,7 @@ public class Mkdir extends Command{
     @Override
     public void help() {
         System.out.println("Использование команды позволяет создать новый объект в текущей директории.");
-        System.out.println("Пример ввода команды: mkdir + \"имя нового объекта\"");
+        System.out.println("Пример ввода команды: mkdir / md + \"имя нового объекта\"");
     }
 
     @Override
