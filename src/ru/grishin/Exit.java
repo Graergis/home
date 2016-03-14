@@ -1,9 +1,11 @@
 package ru.grishin;
 
-public class Exit extends BasicCommand {
+import java.io.File;
+
+public class Exit extends Command {
 
     protected Exit() {
-        super("exit", "exit");
+        super("exit");
     }
 
     @Override
@@ -12,7 +14,7 @@ public class Exit extends BasicCommand {
     }
 
     @Override
-    public void execute(String root,String[] args) {
+    public void execute(File root, String[] args) {
         System.exit(0);
     }
 }

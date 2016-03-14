@@ -1,32 +1,31 @@
 package ru.grishin;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class CommandList {
 
-    private List<BasicCommand> listCommand = new ArrayList<>();
+    private Map<String, Command> commands = new HashMap<>();
 
-    public BasicCommand getCommandByName(String name){
-        for (int i = 0; i < listCommand.size(); i++) {
-            BasicCommand command = listCommand.get(i);
-            if (command.getName().equals(name) || command.getName2().equals(name)){
-                return command;
-            }
-        }
-        return null;
+    private void putCommand(Command command) {
+        commands.put(command.getName(), command);
+        commands.put(command.getShortName(), command);
     }
+
     public CommandList(){
-        listCommand.add(new Exit());
-        listCommand.add(new Help());
-        listCommand.add(new Dir());
-        listCommand.add(new Copy());
-        listCommand.add(new Mkdir());
-        listCommand.add(new Rmdir());
-        listCommand.add(new Chdir());
+        putCommand(new Dir());
+        putCommand(new Chdir());
+        putCommand(new Copy());
+        putCommand(new Exit());
+        putCommand(new Help());
+        putCommand(new Mkdir());
+        putCommand(new Rmdir());
     }
 
-    public List<BasicCommand> getCommands() {
-        return listCommand;
+    public Command getCommandByName(String name){
+        return commands.get(name);
+    }
+
+    public List<Command> getCommands() {
+        return Collections.unmodifiableList(new ArrayList<>(commands.values()));
     }
 }

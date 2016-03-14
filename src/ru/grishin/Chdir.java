@@ -2,7 +2,7 @@ package ru.grishin;
 
 import java.io.File;
 
-public class Chdir extends BasicCommand{
+public class Chdir extends Command {
 
     protected Chdir(){
         super("chdir", "cd");
@@ -16,14 +16,19 @@ public class Chdir extends BasicCommand{
     }
 
     @Override
-    public void execute(String root,String[] args) {
-        if (args[0].equals("..") & root.length() > 3){
-            Command.COMM = new File(root).getParent();
+    public void execute(File root, String[] args) {
+        if (args[0].equals("..")) {
+            Console.WORK_DIRECTORY = new File(root.getParent());
         } else {
-            if (!args[0].equals("..")) {
-                java.io.File file = new java.io.File(args[0]);
+            java.io.File file = new java.io.File(root, args[0]);
+            if (file.exists()) {
+                Console.WORK_DIRECTORY = file;
+            } else {
+                file = new java.io.File(args[0]);
                 if (file.exists()) {
-                    Command.COMM = args[0];
+                    Console.WORK_DIRECTORY = file;
+                } else {
+                    System.out.println("File not exists");
                 }
             }
         }

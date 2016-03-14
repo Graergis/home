@@ -2,7 +2,7 @@ package ru.grishin;
 
 import java.io.File;
 
-public class Dir extends BasicCommand{
+public class Dir extends Command {
 
     protected Dir() {
         super("dir", "dir");
@@ -16,12 +16,8 @@ public class Dir extends BasicCommand{
     }
 
     @Override
-    public void execute(String root,String[] args) {
-        if (root.equals("")){
-            root = Command.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-        }
-        File myFile = new File(root);
-        File[] files = myFile.listFiles();
+    public void execute(File root, String[] args) {
+        File[] files = root.listFiles();
         if (files != null) {
             System.out.println("=================================================");
             for (int i = 0; i <files.length ; i++) {
