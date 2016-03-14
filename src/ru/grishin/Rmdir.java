@@ -5,7 +5,7 @@ import java.io.File;
 public class Rmdir extends BasicCommand{
 
     protected Rmdir(){
-        super("rmdir");
+        super("rmdir", "delete");
     }
 
     @Override

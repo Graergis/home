@@ -5,7 +5,7 @@ import java.io.File;
 public class Dir extends BasicCommand{
 
     protected Dir() {
-        super("dir");
+        super("dir", "dir");
     }
 
     @Override

@@ -2,8 +2,8 @@ package ru.grishin;
 
 public class Help extends BasicCommand {
 
-    public Help() {
-        super("help");
+    protected Help() {
+        super("help", "help");
     }
 
     @Override

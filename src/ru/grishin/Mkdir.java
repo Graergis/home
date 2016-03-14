@@ -4,8 +4,8 @@ import java.io.File;
 
 public class Mkdir extends BasicCommand{
 
-    public Mkdir() {
-        super("mkdir");
+    protected Mkdir() {
+        super("mkdir", "mkdir");
     }
 
     @Override

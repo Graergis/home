@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class Copy extends BasicCommand{
 
-    public Copy(){
-        super("copy");
+    protected Copy(){
+        super("copy", "copy");
     }
 
     @Override

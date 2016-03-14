@@ -10,7 +10,7 @@ public class CommandList {
     public BasicCommand getCommandByName(String name){
         for (int i = 0; i < listCommand.size(); i++) {
             BasicCommand command = listCommand.get(i);
-            if (command.getName().equals(name) ){
+            if (command.getName().equals(name) || command.getName2().equals(name)){
                 return command;
             }
         }

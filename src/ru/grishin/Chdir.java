@@ -5,12 +5,14 @@ import java.io.File;
 public class Chdir extends BasicCommand{
 
     protected Chdir(){
-        super("chdir");
+        super("chdir", "cd");
     }
 
     @Override
     public void help() {
         System.out.println("Смена текущего нахождения, на новую директорию");
+        System.out.println("Пример ввода команды: chdir / cd + ..  \"возвращение в родительскую директорию\"");
+        System.out.println("Пример ввода команды: chdir / cd + C:\\Program File\\  - переход по точному адресу");
     }
 
     @Override

@@ -2,8 +2,8 @@ package ru.grishin;
 
 public class Exit extends BasicCommand {
 
-    public Exit() {
-        super("exit");
+    protected Exit() {
+        super("exit", "exit");
     }
 
     @Override
