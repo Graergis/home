@@ -28,6 +28,7 @@ public class Dir extends Command {
                     Matcher matcher = p.matcher(files[i].getName());
                     if (matcher.find()) {
                         System.out.println(files[i]);
+                        Console.LISTDIR.add("" + files[i]);
                     }
                 }
             } else {

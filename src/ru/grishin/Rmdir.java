@@ -17,11 +17,13 @@ public class Rmdir extends Command{
     @Override
     public void execute(File root,String[] args) {
         if(args.length != 0) {
-            File file = new File(root, args[0]);
-            if (file.delete()) {
-                System.out.println("Объект " + args[0] + " успешно удален.");
-            } else {
-                System.out.println("Объект не найден.");
+            for (int i = 0; i < args.length; i++) {
+                File file = new File(root, args[i]);
+                File file2 = new File(args[i]);
+                if (file.delete() | file2.delete()) {
+                    System.out.println("Объект успешно удален.");
+                } else {
+                }
             }
         }
     }

@@ -18,22 +18,24 @@ public class Copy extends Command{
 
     @Override
     public void execute(File root,String[] args) {
-        java.io.File one = new java.io.File(root, args[0]);
-        if (!one.exists()) {
-            one = new File(args[0]);
-        }
-        java.io.File two = new java.io.File(root, args[1]);
-        if (!two.exists()) {
-            two = new File(args[1]);
-        }
-        try {
-            if (one.isFile()) {
-                Files.copy(one.toPath(), two.toPath());
-            } else {
-                copyDirectory(one, two);
+        for (int i = 0; i < args.length - 1; i++) {
+            java.io.File two = new java.io.File(root, args[args.length - 1]+ "(" + i +")");
+            if (!two.exists()) {
+                two = new File(args[args.length - 1] + "(" + i +")");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            java.io.File one = new java.io.File(root, args[i]);
+            if (!one.exists()) {
+                one = new File(args[i]);
+            }
+            try {
+                if (one.isFile()) {
+                    Files.copy(one.toPath(), two.toPath());
+                } else {
+                    copyDirectory(one, two);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
